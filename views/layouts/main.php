@@ -363,13 +363,13 @@ if (isset(Yii::$app->user->identity->nombreUsuario)) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        &copy; <?php echo date('Y'); ?> , Brentec Soluciones Tecnol&oacute;gicas SA de CV <br>
-                        Calle 20 no 235 Int 1009 x 15 y 7<br>
+                        &copy; <?php echo date('Y'); ?> , Rafael Solis <br>
+                        Hello word<br>
                         M&eacute;rida Yucat&aacute;n M&eacute;xico<br>
-                        CP. 97130<br>
-                        Tel: 9999121484<br>
-                        soporte@brentec.mx<br>
-                        ventas@brentec.mx<br><br>
+                        CP. 97000<br>
+                        Tel: 9999123456<br>
+                        soporte@seguros.mx<br>
+                        ventas@seguros.mx<br><br>
 
                         <?php
                         $vfile1 = Yii::$app->basePath . "/version";
