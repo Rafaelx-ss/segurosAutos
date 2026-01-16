@@ -1,0 +1,85 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Idiomas */
+/* @var $form yii\widgets\ActiveForm */
+
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
+?>
+
+
+
+ <?php $form = ActiveForm::begin(); ?>
+
+<div class="col-sm-12 pleft-0">
+<?php $tterror = count($model->getErrors());
+if($tterror != 0){
+	echo '<div class="alert alert-danger" role="alert">
+			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+			'.$form->errorSummary($model).'
+	</div>';
+}else{
+	if(isset($_GET['insert'])){
+		if($_GET['insert'] == 'true'){
+			echo '<div class="alert alert-success" role="alert">
+					 <i class="fa fa-check-square-o" aria-hidden="true"></i>  Registro guardado con exito! ('.Html::a("Ver idiomas", $url = ['idiomas/update&id='.$_GET['id']], $options = ['class'=>'']).')
+				 </div>';
+		}
+	}
+	
+	if(isset($_GET['update'])){
+		if($_GET['update'] == 'true'){
+			echo '<div class="alert alert-success" role="alert">
+					 <i class="fa fa-check-square-o" aria-hidden="true"></i>  Registro actualizado con exito!
+				 </div>';
+		}
+	}
+}
+?>
+</div>
+<div style="clear: both;"></div>
+
+
+<div class="col-sm-4 float-left pleft-0">    
+		<?php 
+	$flags = array('AD'=>'AD', 'AE'=>'AE', 'AF'=>'AF', 'AG'=>'AG', 'AI'=>'AI', 'AL'=>'AL', 'AM'=>'AM', 'AO'=>'AO', 'AR'=>'AR', 'AS'=>'AS', 'AT'=>'AT', 'AU'=>'AU', 'AW'=>'AW', 'AX'=>'AX', 'AZ'=>'AZ', 'BA'=>'BA', 'BB'=>'BB', 'BD'=>'BD', 'BE'=>'BE', 'BF'=>'BF', 'BG'=>'BG', 'BH'=>'BH', 'BI'=>'BI', 'BJ'=>'BJ', 'BL'=>'BL', 'BM'=>'BM', 'BN'=>'BN', 'BO'=>'BO', 'BR'=>'BR', 'BS'=>'BS', 'BT'=>'BT', 'BV'=>'BV', 'BW'=>'BW', 'BY'=>'BY', 'BZ'=>'BZ', 'CA'=>'CA', 'CC'=>'CC', 'CD'=>'CD', 'CF'=>'CF', 'CG'=>'CG', 'CH'=>'CH', 'CI'=>'CI', 'CK'=>'CK', 'CL'=>'CL', 'CM'=>'CM', 'CN'=>'CN', 'CO'=>'CO', 'CR'=>'CR', 'CU'=>'CU', 'CV'=>'CV', 'CW'=>'CW', 'CX'=>'CX', 'CY'=>'CY', 'CZ'=>'CZ', 'DE'=>'DE', 'DJ'=>'DJ', 'DK'=>'DK', 'DM'=>'DM', 'DO'=>'DO', 'DZ'=>'DZ', 'EC'=>'EC', 'EE'=>'EE', 'EG'=>'EG', 'ER'=>'ER', 'ES'=>'ES', 'ET'=>'ET', 'EU'=>'EU', 'FI'=>'FI', 'FJ'=>'FJ', 'FK'=>'FK', 'FM'=>'FM', 'FO'=>'FO', 'FR'=>'FR', 'GA'=>'GA', 'GB'=>'GB', 'GD'=>'GD', 'GE'=>'GE', 'GF'=>'GF', 'GG'=>'GG', 'GH'=>'GH', 'GI'=>'GI', 'GL'=>'GL', 'GM'=>'GM', 'GN'=>'GN', 'GP'=>'GP', 'GQ'=>'GQ', 'GR'=>'GR', 'GS'=>'GS', 'GT'=>'GT', 'GU'=>'GU', 'GW'=>'GW', 'GY'=>'GY', 'HK'=>'HK', 'HM'=>'HM', 'HN'=>'HN', 'HR'=>'HR', 'HT'=>'HT', 'HU'=>'HU', 'ID'=>'ID', 'IE'=>'IE', 'IL'=>'IL', 'IM'=>'IM', 'IN'=>'IN', 'IO'=>'IO', 'IQ'=>'IQ', 'IR'=>'IR', 'IS'=>'IS', 'IT'=>'IT', 'JE'=>'JE', 'JM'=>'JM', 'JO'=>'JO', 'JP'=>'JP', 'KE'=>'KE', 'KG'=>'KG', 'KH'=>'KH', 'KI'=>'KI', 'KM'=>'KM', 'KN'=>'KN', 'KP'=>'KP', 'KR'=>'KR', 'KW'=>'KW', 'KY'=>'KY', 'KZ'=>'KZ', 'LA'=>'LA', 'LB'=>'LB', 'LC'=>'LC', 'LI'=>'LI', 'LK'=>'LK', 'LR'=>'LR', 'LS'=>'LS', 'LT'=>'LT', 'LU'=>'LU', 'LV'=>'LV', 'LY'=>'LY', 'MA'=>'MA', 'MC'=>'MC', 'MD'=>'MD', 'ME'=>'ME', 'MF'=>'MF', 'MG'=>'MG', 'MH'=>'MH', 'MK'=>'MK', 'ML'=>'ML', 'MM'=>'MM', 'MN'=>'MN', 'MO'=>'MO', 'MP'=>'MP', 'MQ'=>'MQ', 'MR'=>'MR', 'MS'=>'MS', 'MT'=>'MT', 'MU'=>'MU', 'MV'=>'MV', 'MW'=>'MW', 'MX'=>'MX', 'MY'=>'MY', 'MZ'=>'MZ', 'NA'=>'NA', 'NC'=>'NC', 'NE'=>'NE', 'NF'=>'NF', 'NG'=>'NG', 'NI'=>'NI', 'NL'=>'NL', 'NO'=>'NO', 'NP'=>'NP', 'NR'=>'NR', 'NU'=>'NU', 'NZ'=>'NZ', 'OM'=>'OM', 'PA'=>'PA', 'PE'=>'PE', 'PF'=>'PF', 'PG'=>'PG', 'PH'=>'PH', 'PK'=>'PK', 'PL'=>'PL', 'PM'=>'PM', 'PN'=>'PN', 'PR'=>'PR', 'PS'=>'PS', 'PT'=>'PT', 'PW'=>'PW', 'PY'=>'PY', 'QA'=>'QA', 'RE'=>'RE', 'RO'=>'RO', 'RS'=>'RS', 'RU'=>'RU', 'RW'=>'RW', 'SA'=>'SA', 'SB'=>'SB', 'SC'=>'SC', 'SD'=>'SD', 'SE'=>'SE', 'SG'=>'SG', 'SH'=>'SH', 'SI'=>'SI', 'SJ'=>'SJ', 'SK'=>'SK', 'SL'=>'SL', 'SM'=>'SM', 'SN'=>'SN', 'SO'=>'SO', 'SR'=>'SR', 'SS'=>'SS', 'ST'=>'ST', 'SV'=>'SV', 'SX'=>'SX', 'SY'=>'SY', 'SZ'=>'SZ', 'TC'=>'TC', 'TD'=>'TD', 'TF'=>'TF', 'TG'=>'TG', 'TH'=>'TH', 'TJ'=>'TJ', 'TK'=>'TK', 'TL'=>'TL', 'TM'=>'TM', 'TN'=>'TN', 'TO'=>'TO', 'TR'=>'TR', 'TT'=>'TT', 'TV'=>'TV', 'TW'=>'TW', 'TZ'=>'TZ', 'UA'=>'UA', 'UG'=>'UG', 'UM'=>'UM', 'US'=>'US', 'UY'=>'UY', 'UZ'=>'UZ', 'VA'=>'VA', 'VC'=>'VC', 'VE'=>'VE', 'VG'=>'VG', 'VI'=>'VI', 'VN'=>'VN', 'VU'=>'VU', 'WF'=>'WF', 'WS'=>'WS', 'XK'=>'XK', 'YE'=>'YE', 'YT'=>'YT', 'ZA'=>'ZA', 'ZM'=>'ZM', 'ZW'=>'ZW');
+	echo $form->field($model, 'iconIdioma')->widget(Select2::classname(), [                         
+			'data' => $flags,
+			'language' => 'es',
+			'options' => ['placeholder' => ' --- Selecciona --- '],
+			'pluginOptions' => ['allowClear' => true]]); 	
+	?>
+</div>
+
+<div class="col-4 float-left  pleft-0">
+	<?= $form->field($model, 'nombreIdioma')->textInput(['maxlength' => true]) ?>
+</div>
+
+
+<div class="col-4 float-left  pleft-0">
+	<?php
+	if($model->isNewRecord){
+		echo $form->field($model, 'activoIdioma')->checkbox(['checked'=>'checked']);
+	}else{
+		echo $form->field($model, 'activoIdioma')->checkbox();
+	}
+	?>
+</div>
+
+
+
+<div style="clear: both;"></div>    
+<div class="col-12  pleft-0">
+    <div class="form-group">
+		<br>
+        <?= Html::submitButton('<i class="pe-7s-diskette"></i> &nbsp;Guardar', ['class' => 'btn '.Yii::$app->globals->btnSave()]) ?>		
+    </div>
+</div>
+
+ <?php ActiveForm::end(); ?>
+
+
